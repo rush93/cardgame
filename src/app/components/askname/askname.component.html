@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 col-xs-12">
+      <div class="page-header">
+        <h1>Votre nom de compte</h1>
+      </div>
+      <div class="login-body">
+        <form [formGroup]="usernameForm" (ngSubmit)="submit()">
+          <div class="col-xs-12">
+            <div class="form-group" [ngClass]="{'has-error has-feedback': usernameForm.get('username').errors && usernameForm.get('username').dirty}">
+              <label for="username">Nom de compte</label>
+              <ng-template [ngIf]="usernameForm.get('username').dirty">
+                <br/>
+                <label class="control-label" *ngIf="usernameForm.get('username')?.errors?.required" for="username">Le nom de compte est requis</label>
+                <label class="control-label" *ngIf="usernameForm.get('username')?.errors?.regex" for="name">Le nom ne dois pas contenir de caractère spétiaux</label>
+              </ng-template>
+              <input type="username" id="username" formControlName="username" name="username" placeholder="username" class="form-control">
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!usernameForm.valid">Valider</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [
+    '../../node_modules/bootflat/css/bootstrap.min.css',
+    './app.component.scss'
+  ]
 })
 export class AppComponent {
-  title = 'cardgame';
+
+  public spin = true;
+
+  public activeSpinner() {
+    this.spin = true;
+  }
+
+  public desactiveSpinner() {
+    this.spin = false;
+  }
+
 }

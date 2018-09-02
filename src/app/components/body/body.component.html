@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>
+    Liste des parties
+    <button class="btn btn-success pull-right create-game" (click)="openCreateGameModal()">Créer une partie</button>
+  </h1>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+      <div class="list-group">
+        <a class="list-group-item active">
+          <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+            <input type="text" class="form-control" placeholder="Rechercher" [(ngModel)]="search" >
+          </div>
+        </a>
+        <a *ngFor="let game of (games | async | search:search);  trackBy:game?.name" class="list-group-item">
+          <span class="badge">{{ game.players? (game.players | keys).length : 0}} / 4</span>
+          {{game.name}}
+        </a>
+      </div>
+  </div>
+</div>
+<app-modal #createGame>
+  <div modal-header>Création de la partie</div>
+  <div modal-body>
+    <form [formGroup]="createGameForm" (onSubmit)="submitCreateGame()">
+      <div class="form-group" [ngClass]="{'has-error has-feedback': createGameForm.get('name').errors && createGameForm.get('name').dirty}">
+        <label for="name">Nom de la partie</label>
+        <ng-template [ngIf]="createGameForm.get('name').dirty">
+          <br/>
+          <label class="control-label" *ngIf="createGameForm.get('name')?.errors?.required" for="name">Le nom est requis</label>
+          <label class="control-label" *ngIf="createGameForm.get('name')?.errors?.regex" for="name">Le nom ne dois pas contenir de caractère spétiaux</label>
+        </ng-template>
+        <input type="text" id="name" formControlName="name" name="name" placeholder="Nom" class="form-control">
+      </div>
+    </form>
+  </div>
+  <div modal-footer>
+    <button type="button" (click)="closeCreateGameModal()" class="btn btn-default">Annuler</button>
+    <button type="submit" (click)="submitCreateGame()" class="btn btn-primary" [disabled]="!createGameForm.valid">Créer</button>
+  </div>
+</app-modal>

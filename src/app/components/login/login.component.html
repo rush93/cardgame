@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 col-xs-12">
+    <div class="page-header">
+      <h1>Connexion</h1>
+    </div>
+    <div class="login-body">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="col-xs-12">
+          <div class="form-group" [ngClass]="{'has-error has-feedback': loginForm.get('email').errors && loginForm.get('email').touched}">
+            <label for="email">Email</label>
+            <ng-template [ngIf]="loginForm.get('email').touched">
+              <br/>
+              <label class="control-label" *ngIf="loginForm.get('email')?.errors?.required" for="email">L'email est requis</label>
+              <label class="control-label"*ngIf="loginForm.get('email')?.errors?.email"  for="email">Ce n'est pas un email valide</label>
+            </ng-template>
+            <input type="email" id="email" formControlName="email" name="email" placeholder="Email" class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="form-group" [ngClass]="{'has-error has-feedback': (loginForm.get('password').errors && loginForm.get('password').touched) || badpassword}">
+            <label for="password">Password</label>
+            <ng-template [ngIf]="loginForm.get('password').touched">
+              <br/>
+              <label class="control-label" *ngIf="loginForm.get('password')?.errors?.required" for="password">Le mot de passe est requis</label>
+              <label class="control-label"*ngIf="loginForm.get('password')?.errors?.minlength" for="password">Le mot de passe dois faire au moins 6 caractères</label>
+            </ng-template>
+            <label class="control-label" *ngIf="badpassword" for="password">Le mot de passe est incorrect</label>
+            <input type="password" id="password" formControlName="password" name="email" placeholder="Password" class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid">Se connecter</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

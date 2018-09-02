@@ -1,0 +1,23 @@
+$img-src: "~bootflat/bootflat/img/check_flat/default.png";
+@import "~bootflat/bootflat/scss/bootflat.scss";
+
+.btn-primary {
+  background-color: $bluejeans-dark;
+  border-color: $bluejeans-dark;
+  &:hover {
+    background-color: $bluejeans-light;
+    border-color: $bluejeans-light;
+  }
+}
+
+body {
+  background: $darkgray-dark;
+  color: $lightgray-light
+}
+
+.loader {
+  display: block;
+  width: 10%;
+  margin: auto;
+  margin-top: 25%;
+}
