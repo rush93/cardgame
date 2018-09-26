@@ -1,0 +1,25 @@
+<div class="owner">
+  <div class="player-name">
+    {{owner?.pseudo}}
+  </div>
+  <div class="deck">
+  </div>
+</div>
+<div class="opposents opposents-{{(game?.players | keys)?.length}}">
+  <ng-template [ngIf]="game && game.players && players">
+    <ng-template ngFor let-playerKey [ngForOf]="game?.players | keys">
+      <div *ngIf="playerKey !== userService.uid" class="player">
+        <div class="player-name">
+          {{players ? players[playerKey]?.pseudo : ''}}
+        </div>
+        <div class="deck">
+  
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>
+<div class="actions">
+  <button class="btn btn-block btn-danger" (click)="leaveGame()">Quitter la partie</button>
+  <button *ngIf="game?.players[userService.uid]?.leader && (game?.players | keys)?.length >= 2" (click)="startGame()" class="btn btn-block btn-success">Lancer la partie</button>
+</div>

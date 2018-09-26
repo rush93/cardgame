@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host cardgame.test --port 3333",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +24,8 @@
     "bootflat": "^2.0.4",
     "core-js": "^2.5.4",
     "firebase": "^5.4.2",
+    "ngx-take-until-destroy": "^4.1.2",
+    "noty": "^3.2.0-beta",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },

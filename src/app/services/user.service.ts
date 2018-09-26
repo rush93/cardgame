@@ -1,14 +1,17 @@
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Player } from '../models/player';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { Game } from '../models/game';
 
 @Injectable()
 export class UserService {
   public player: Player;
+  public playerRef: AngularFireObject<any>;
   public uid: string;
+  public playerObserver: Observable<Player>;
 
   private subsribtion: Subscription;
 
@@ -30,7 +33,9 @@ export class UserService {
         return;
       }
       this.uid = user.uid;
-      this.subsribtion = this.db.object(`/players/${this.uid}`).valueChanges().subscribe((obj) => {
+      this.playerRef = this.db.object(`/players/${this.uid}`);
+      this.playerObserver = this.playerRef.valueChanges();
+      this.subsribtion = this.playerObserver.subscribe((obj) => {
         if (!obj) {
           resolve(false);
           return;
@@ -49,5 +54,13 @@ export class UserService {
     }
     this.afAuth.auth.signOut();
     this.router.navigate(['/']);
+  }
+
+  public setGame(currentGame: string): Promise<void> {
+    return this.playerRef.update({ currentGame });
+  }
+
+  public getPlayer(playerKey: string): Observable<Player> {
+    return <Observable<Player>>this.db.object(`/players/${playerKey}`).valueChanges();
   }
 }

@@ -1,0 +1,103 @@
+@import "../../variables.scss";
+
+.owner {
+  position: fixed;
+  bottom: 10px;
+  width: 40vw;
+  max-width: 500px;
+  left: 30vw;
+  text-align: center;
+}
+@media screen and (min-width: 1250px) {
+  .owner {
+    left: calc(50vw - 250px);
+  }
+}
+
+.player-name {
+  display: inline-block;
+  margin: auto;
+  margin-bottom: 30px;
+  background: white;
+  color: black;
+  padding: 0px 20px;
+  font-size: 30px;
+}
+
+.deck {
+  width: 100%;
+  padding-bottom: 40%;
+  background: $bluejeans-light;
+}
+.opposents {
+  position: fixed;
+  width: 0;
+  left: 0;
+  top: 0;
+  height: 60%;
+  
+  .player {
+    text-align: center;
+    position: fixed;
+    width: 40vw;
+    max-width: 500px;
+  }
+  
+  &.opposents-2 .player {
+    transform: rotate(180deg);
+    top: 10px;
+    left: 30vw;
+    
+    .player-name {
+      transform: rotate(180deg);
+    }
+  }
+  
+  &.opposents-3 .player {
+    &:first-child {
+      transform: rotate(90deg);
+      top: 18%;
+      left: -7%;
+    }
+    &:last-child {
+      transform: rotate(-90deg);
+      top: 18%;
+      right: -7%;
+    }
+  }
+  &.opposents-4 .player{
+    &:first-child {
+      transform: rotate(90deg);
+      top: 36vh;
+      left: -7%;
+    }
+    &:last-child {
+      transform: rotate(-90deg);
+      top: 36vh;
+      right: -7%;
+    }
+    &:nth-child(2) {
+      transform: rotate(180deg);
+      left: 30vw;
+      top: 10px;
+    }
+  }
+}
+
+.actions {
+  
+  position: fixed;
+  top: 40%;
+  text-align: center;
+  width: 50%;
+  left: 25%;
+  
+  .btn {
+    font-size: 30px;
+  }
+}
+@media screen and (min-width: 1250px) {
+  .opposents-2 .player, &.opposents-4 .player:nth-child(2) {
+    left: calc(50vw - 250px) !important;
+  }
+}

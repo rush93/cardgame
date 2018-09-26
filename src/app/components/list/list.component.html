@@ -13,10 +13,12 @@
             <input type="text" class="form-control" placeholder="Rechercher" [(ngModel)]="search" >
           </div>
         </a>
-        <a *ngFor="let game of (games | async | search:search);  trackBy:game?.name" class="list-group-item">
-          <span class="badge">{{ game.players? (game.players | keys).length : 0}} / 4</span>
-          {{game.name}}
-        </a>
+        <ng-template ngFor let-game [ngForOf]="games | async | values" let-i="index">
+          <a *ngIf="(game.players | keys).length < 4 && ( !search || game.name.includes(search))" (click)="joinGame(i)" class="list-group-item">
+            <span class="badge">{{ game.players? (game.players | keys).length : 0}} / 4</span>
+            {{game.name}}
+          </a>
+        </ng-template>
       </div>
   </div>
 </div>
