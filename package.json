@@ -1,9 +1,9 @@
 {
-  "name": "cardgame",
+  "name": "capito",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host cardgame.test --port 3333",
+    "start": "ng serve --host capito.test --port 3333",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
